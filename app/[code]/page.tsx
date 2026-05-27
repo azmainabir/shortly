@@ -10,13 +10,22 @@ export default async function RedirectPage({
 
   const { data } = await supabase
     .from("links")
-    .select("original_url")
+    .select("id, original_url, click_count")
     .eq("short_code", code)
     .single();
 
   if (!data) {
     redirect("/");
   }
+
+  // Increment click count
+  await supabase
+    .from("links")
+    .update({ click_count: (data.click_count || 0) + 1 })
+    .eq("id", data.id);
+
+  // Log the click
+  await supabase.from("clicks").insert([{ link_id: data.id }]);
 
   redirect(data.original_url);
 }
