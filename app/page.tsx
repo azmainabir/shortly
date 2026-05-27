@@ -78,11 +78,12 @@ export default function Home() {
         )}
       </div>
       <p className="mt-8 text-slate-600 text-sm">
-        Developed by <span className="text-violet-400 font-medium">Azmain Tahmid Abir</span>
+        Developed by <a href="https://www.linkedin.com/in/azmain-abir" target="_blank" className="text-violet-400 font-medium hover:underline">Azmain Tahmid Abir</a>
       </p>
     </main>
   )
 }
+
 
 
 
