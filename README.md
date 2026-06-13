@@ -1,6 +1,6 @@
-# ğŸ”— Shortly â€” Modern URL Shortener with Analytics
+# ?? Shortly — Modern URL Shortener with Analytics
 
-![Shortly Preview](https://shortly-gilt-eight.vercel.app/og.png)
+![Shortly Preview](./public/preview.png)
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue)
@@ -8,58 +8,59 @@
 ![Vercel](https://img.shields.io/badge/Deployed-Vercel-black)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-> A blazingly fast URL shortener with real-time analytics, custom short codes, QR code generation, and geolocation tracking.
+> A fast, modern URL shortener that turns long links into clean short ones, tracks every click, and generates a scannable QR code for each link.
 
-ğŸš€ **[Live Demo](https://shortly-gilt-eight.vercel.app)** | ğŸ‘¨â€ğŸ’» **[GitHub](https://github.com/azmainabir/shortly)**
+?? **[Live Demo](https://shortly-gilt-eight.vercel.app)** | ????? **[GitHub](https://github.com/azmainabir/shortly)**
 
 ---
 
-## âœ¨ Features
+## ? Features
 
-- ğŸ”— Instantly shorten any long URL
-- ğŸ“Š Track every click with detailed analytics
-- ğŸ“± Device & browser detection
-- ğŸŒ Geolocation tracking (country, city)
-- ğŸ“² QR code generation for every link
-- âš¡ Fast redirects with database caching
-- ğŸŒ™ Beautiful dark mode UI
-- ğŸš€ Deployed on Vercel with CI/CD
+- ?? Instantly shorten any long URL
+- ?? Click counting for every link
+- ?? QR code generation for every short link
+- ?? One-click copy to clipboard
+- ? Instant redirects from short link to original URL
+- ?? Beautiful dark mode UI
 
-## ğŸ› ï¸ Tech Stack
+## ?? Roadmap (Coming Soon)
 
-| Layer              | Technology                           |
-| ------------------ | ------------------------------------ |
-| Frontend           | Next.js 15, TypeScript, Tailwind CSS |
-| Backend            | Next.js API Routes                   |
-| Database           | PostgreSQL (Supabase)                |
-| Deployment         | Vercel                               |
-| Auth (coming soon) | NextAuth.js                          |
+- ?? Geolocation tracking (country, city)
+- ?? Device and browser detection
+- ?? Full analytics dashboard
+- ?? User authentication with Google
+- ? Redis caching for faster redirects
 
-## ğŸš€ Getting Started
+## ??? Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, TypeScript, Tailwind CSS |
+| Backend | Next.js API Routes |
+| Database | PostgreSQL (Supabase) |
+| Deployment | Vercel |
+
+## ?? Getting Started
 
 ### Prerequisites
-
 - Node.js 18+
-- npm or yarn
+- npm
 - Supabase account
 
 ### Installation
 
 1. Clone the repository:
-
 ```bash
 git clone https://github.com/azmainabir/shortly.git
 cd shortly
 ```
 
 2. Install dependencies:
-
 ```bash
 npm install
 ```
 
 3. Create a `.env.local` file:
-
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_key
@@ -67,11 +68,67 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 4. Run the development server:
-
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## ğŸ“ Project Structure
+## ?? Project Structure
+
+shortly/
+
++-- app/
+
+¦   +-- [code]/         # Dynamic redirect page
+
+¦   +-- api/shorten/    # URL shortening API
+
+¦   +-- api/health/     # Health check endpoint
+
+¦   +-- page.tsx        # Homepage
+
+¦   +-- layout.tsx      # Root layout
+
++-- lib/
+
+¦   +-- supabase.ts     # Database client
+
++-- public/
+
++-- preview.png     # App screenshot
+
+## ??? Database Schema
+
+```sql
+-- Links table
+links (id, original_url, short_code, created_at, click_count)
+
+-- Clicks table
+clicks (id, link_id, clicked_at, country, device_type, browser)
+```
+
+## ?? What I Learned
+
+Building Shortly taught me how a full-stack app fits together end to end — designing a database schema, building API routes, connecting a frontend to a backend, handling dynamic routing for redirects, and deploying to production with automatic CI/CD. If I rebuilt it, I would add Redis caching from the start to make redirects even faster and implement the analytics dashboard as a core feature rather than a future step.
+
+## ?? Deployment
+
+This project is deployed on Vercel. Every push to the `main` branch triggers an automatic deployment.
+
+## ????? Developer
+
+**Azmain Tahmid Abir**
+CSE Student @ Daffodil International University
+On a mission to master Data Science · AI Engineering · Cyber Security · Software Development
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/azmain-abir)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/azmainabir)
+
+## ?? License
+
+MIT License — feel free to use this project for learning or personal use.
+
+---
+
+<p align="center">Developed with ?? by <strong><a href="https://www.linkedin.com/in/azmain-abir">Azmain Tahmid Abir</a></strong></p>
