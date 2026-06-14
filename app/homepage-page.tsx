@@ -10,20 +10,37 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [error, setError] = useState("");
 
   const handleShorten = async () => {
-    if (!url) return;
+    if (!url.trim()) return;
+
     setLoading(true);
     setShowQR(false);
-    const response = await fetch("/api/shorten", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url }),
-    });
-    const data = await response.json();
-    setShortUrl(data.shortUrl);
-    setLoading(false);
-    setShowQR(true);
+    setError("");
+    setShortUrl("");
+
+    try {
+      const response = await fetch("/api/shorten", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setShortUrl(data.shortUrl);
+      setShowQR(true);
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCopy = () => {
@@ -51,10 +68,11 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row gap-3 w-full">
           <input
-            type="url"
+            type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Paste your long URL here..."
+            aria-label="Long URL to shorten"
             className="flex-1 px-5 py-4 rounded-xl bg-slate-800 text-white border border-slate-700 focus:outline-none focus:border-violet-500 text-lg"
           />
           <button
@@ -65,6 +83,12 @@ export default function Home() {
             {loading ? "Shortening..." : "Shorten"}
           </button>
         </div>
+
+        {error && (
+          <div className="mt-3 p-4 bg-red-900/40 border border-red-700 text-red-300 rounded-xl">
+            {error}
+          </div>
+        )}
 
         {shortUrl && (
           <div className="mt-3 space-y-2">
